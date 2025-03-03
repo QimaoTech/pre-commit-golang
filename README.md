@@ -43,6 +43,7 @@ You can copy/paste the following snippet into your `.pre-commit-config.yaml` fil
     -   id: go-build-pkg
     -   id: go-build-repo-mod
     -   id: go-build-repo-pkg
+    -   id: go-build-repo-no-work
     #
     # Go Mod Tidy
     #
@@ -319,6 +320,15 @@ Compiles packages, along with their dependencies, but does not install the resul
 | `go-build-pkg`      | Run `'go build -o /dev/null [$ARGS] ./$(dirname $FILE)'` for each staged .go file
 | `go-build-repo-mod` | Run `'cd $(mod_root); go build -o /dev/null [$ARGS] ./...'` for each module in the repo
 | `go-build-repo-pkg` | Run `'go build -o /dev/null [$ARGS] ./...'` in repo root folder
+
+##### Module Mode Control
+You can control the module mode behavior using environment variables:
+```
+# Disable workspace mode (GOWORK=off)
+args: ['--hook:env:GOWORK=off']
+```
+
+This is particularly useful when you want to ensure each module builds independently without workspace dependencies.
 
 ##### Install
 Comes with Golang ( [golang.org](https://golang.org/) )

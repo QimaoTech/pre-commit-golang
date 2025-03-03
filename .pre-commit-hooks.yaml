@@ -145,6 +145,24 @@
     pass_filenames: false
 
 # ==============================================================================
+# go-build-repo-mod-no-work
+#   * Repo-Based
+#   * Recursive
+#   * Targets ALL folders with a go.mod file
+#   * Executes if any .go files modified
+#   * Executes if go.mod modified
+#   * Executes with GOWORK=off
+# ==============================================================================
+-   id: go-build-repo-mod-no-work
+    name: 'go-build-repo-mod-no-work'
+    entry: go-build-repo-mod-no-work.sh
+    files: '(\.go$)|(\bgo\.mod$)'
+    exclude: '(^|/)vendor/'
+    language: 'script'
+    description: "Run 'cd $(mod_root); GOWORK=off go build -o /dev/null [$ARGS] ./...' for each module in the repo"
+    pass_filenames: false
+    
+# ==============================================================================
 # go-build-repo-pkg
 #   * Repo-Based
 #   * Recursive
